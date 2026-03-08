@@ -187,6 +187,39 @@
       .gift-price-right { text-align: center; }
       .footer-grid { grid-template-columns: 1fr; gap: 28px; }
     }
+
+    @media (max-width: 640px) {
+      .ann { font-size: 11px; padding: 10px 16px; }
+      nav { height: 56px; padding: 0 16px; }
+      .logo { font-size: 18px; }
+      h1 { font-size: clamp(32px, 9vw, 52px); }
+      h2 { font-size: clamp(24px, 7vw, 40px); }
+      .hero-sub { font-size: 15px; }
+      .btns { flex-direction: column; gap: 12px; align-items: stretch; }
+      .btns .btn { text-align: center; padding: 16px 24px; }
+      .grid-4 { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .pcard .pimg { height: 52vw; }
+      .pname { font-size: 15px; }
+      .pprice { font-size: 16px; }
+      .add-btn { padding: 13px; font-size: 11px; }
+      .hero-text, .about-text, .ls-text, .proof-text { padding: 36px 20px; }
+      section { padding: 52px 16px; }
+      .philosophy h2 { font-size: clamp(22px, 7vw, 36px); }
+      .steps { gap: 24px; }
+      .step { padding: 0; }
+      .email-form { flex-direction: column; border: none; }
+      .email-form input { border: 1.5px solid rgba(20,20,20,.18); padding: 15px 18px; margin-bottom: 8px; }
+      .email-form button { padding: 15px; }
+      .gift-body { padding: 28px 20px; }
+      .gift-body h2 { font-size: clamp(22px, 6vw, 32px); }
+      .footer-grid { padding: 0; }
+      .footer-links { gap: 12px; }
+    }
+
+    @media (max-width: 400px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .pcard .pimg { height: 72vw; }
+    }
   </style>
 </head>
 <body>
