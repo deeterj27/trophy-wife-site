@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROPHYWIFE — Finishing Salt Co</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink:  #D61D6A;
+      --red:   #E94440;
+      --cream: #F0E6D0;
+      --lav:   #F5EEF8;
+      --dark:  #141414;
+      --gold:  #C9A84C;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+    /* ANN */
+    .ann { background: var(--dark); color: var(--cream); text-align: center; padding: 11px; font-size: 12.5px; letter-spacing: .1em; font-weight: 500; }
+    .ann b { color: var(--red); }
+
+    /* NAV */
+    nav { background: var(--cream); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 68px; border-bottom: 1px solid rgba(0,0,0,.08); position: sticky; top: 0; z-index: 200; }
+    .logo { font-weight: 900; font-size: 20px; letter-spacing: .14em; color: var(--red); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--dark); font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta { background: var(--red); color: #fff !important; padding: 10px 22px; border-radius: 1px; }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 108px); }
+    .hero-img { background: var(--pink); overflow: hidden; position: relative; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .hero-text { background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 80px 64px; }
+    .eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+    .eyebrow-red   { color: var(--red); }
+    .eyebrow-pink  { color: var(--pink); }
+    .eyebrow-muted { color: rgba(240,230,208,.45); }
+    h1 { font-family: 'Bodoni Moda', serif; font-weight: 900; font-size: clamp(42px,5vw,76px); line-height: 1.04; color: var(--cream); margin-bottom: 22px; }
+    h1 em { font-style: italic; color: var(--pink); }
+    .hero-sub { font-size: 16px; line-height: 1.75; color: rgba(240,230,208,.72); max-width: 420px; margin-bottom: 38px; }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; padding: 15px 30px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: opacity .15s, transform .15s; }
+    .btn:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-red     { background: var(--red);   color: #fff; }
+    .btn-cream   { background: var(--cream); color: var(--dark); }
+    .btn-dark    { background: var(--dark);  color: #fff; }
+    .btn-pink    { background: var(--pink);  color: #fff; }
+    .btn-outline { background: transparent; color: var(--cream); border: 1.5px solid rgba(240,230,208,.35); }
+
+    /* SECTION */
+    section { padding: 96px 52px; }
+    h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(28px,3.5vw,50px); font-weight: 900; line-height: 1.08; margin-bottom: 18px; }
+    .body-lg { font-size: 17px; line-height: 1.75; color: rgba(20,20,20,.62); }
+    .body-lg-light { color: rgba(240,230,208,.72); }
+
+    /* PHILOSOPHY */
+    .philosophy { background: var(--pink); color: #fff; text-align: center; padding: 84px 52px; }
+    .philosophy h2 { color: #fff; max-width: 800px; margin: 0 auto 18px; }
+    .philosophy .body-lg { color: rgba(255,255,255,.8); max-width: 560px; margin: 0 auto 42px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 36px; }
+    .pill { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.28); color: #fff; padding: 8px 20px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+    /* PRODUCTS */
+    .products { background: var(--lav); }
+    .products-hdr { text-align: center; margin-bottom: 60px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1260px; margin: 0 auto 24px; }
+    .pcard { background: #fff; border-radius: 2px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .pcard:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
+    .pimg { height: 260px; overflow: hidden; position: relative; }
+    .pimg img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .pbadge { position: absolute; top: 0; left: 0; right: 0; background: var(--red); color: #fff; text-align: center; padding: 8px; font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+    .pbadge-hero { background: var(--pink); }
+    .pbody { padding: 20px; }
+    .pnum { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 5px; }
+    .pname { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+    .pdesc { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 18px; }
+    .pfoot { display: flex; align-items: center; justify-content: space-between; }
+    .pprice { font-size: 18px; font-weight: 700; }
+    .pprice sub { font-size: 11px; color: #888; font-weight: 400; vertical-align: baseline; margin-left: 2px; }
+    .add-btn { background: var(--dark); color: #fff; border: none; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border-radius: 1px; font-family: 'DM Sans',sans-serif; transition: background .15s; }
+    .add-btn:hover { background: var(--red); }
+
+    /* GIFT CARD */
+    .gift-card { background: var(--dark); display: flex; overflow: hidden; border-radius: 2px; max-width: 1260px; margin: 0 auto; }
+    .gift-img { flex: 0 0 400px; overflow: hidden; background: var(--pink); }
+    .gift-img img { width: 100%; height: 100%; object-fit: cover; }
+    .gift-body { padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .gift-body h2 { color: var(--cream); font-size: clamp(26px,2.8vw,44px); margin-bottom: 14px; }
+    .gift-body p { font-size: 16px; color: rgba(240,230,208,.68); line-height: 1.7; max-width: 500px; margin-bottom: 32px; }
+    .gift-price { font-size: 54px; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 28px; }
+    .gift-price sub { font-size: 18px; color: rgba(255,255,255,.4); font-weight: 400; }
+
+    /* LIFESTYLE SPLIT */
+    .lifestyle-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; padding: 0; }
+    .ls-img { overflow: hidden; }
+    .ls-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ls-text { background: var(--red); color: #fff; padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .ls-text h2 { color: #fff; max-width: 420px; margin-bottom: 18px; }
+    .ls-text p { font-size: 16px; color: rgba(255,255,255,.78); max-width: 420px; line-height: 1.75; margin-bottom: 38px; }
+    .use-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    .use-list li { display: flex; align-items: flex-start; gap: 14px; }
+    .use-list .dot { width: 6px; height: 6px; background: rgba(255,255,255,.5); border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+    .use-list span { font-size: 15px; color: rgba(255,255,255,.82); line-height: 1.55; }
+    .use-list strong { color: #fff; }
+
+    /* ABOUT SPLIT */
+    .about-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 620px; padding: 0; }
+    .about-img { overflow: hidden; background: var(--pink); }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-text { background: var(--lav); padding: 88px 68px; display: flex; flex-direction: column; justify-content: center; }
+    .about-text h2 { margin-bottom: 18px; }
+    .about-text p { font-size: 16px; line-height: 1.8; color: rgba(20,20,20,.65); margin-bottom: 18px; max-width: 480px; }
+
+    /* HOW TO */
+    .howto { background: var(--cream); }
+    .howto-hdr { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 36px; max-width: 1100px; margin: 0 auto; }
+    .step { padding-left: 22px; border-left: 3px solid var(--red); }
+    .step:nth-child(even) { border-left-color: var(--pink); }
+    .step-n { font-size: 10px; font-weight: 700; letter-spacing: .22em; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
+    .step:nth-child(even) .step-n { color: var(--pink); }
+    .step h4 { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 700; margin-bottom: 9px; }
+    .step p { font-size: 14px; color: #555; line-height: 1.68; }
+
+    /* SOCIAL PROOF / PHOTO BAND */
+    .proof-band { background: var(--dark); display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; padding: 0; }
+    .proof-img { overflow: hidden; }
+    .proof-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .proof-text { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .proof-text h2 { color: var(--cream); margin-bottom: 40px; }
+    .tgrid { display: flex; flex-direction: column; gap: 20px; }
+    .tcard { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); border-left: 3px solid var(--pink); padding: 22px 24px; }
+    .stars { color: var(--red); font-size: 13px; margin-bottom: 10px; }
+    .ttext { font-style: italic; font-size: 14px; line-height: 1.7; color: rgba(240,230,208,.75); margin-bottom: 12px; }
+    .tauthor { font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: .05em; }
+
+    /* GIFT BAND */
+    .gift-band { background: var(--pink); display: flex; align-items: center; justify-content: space-between; padding: 72px 80px; gap: 48px; }
+    .gift-band h2 { color: #fff; max-width: 540px; }
+    .gift-band p { font-size: 16px; color: rgba(255,255,255,.78); max-width: 500px; margin-top: 14px; }
+    .gift-price-right { text-align: right; flex-shrink: 0; }
+    .gift-price-right .amount { font-size: 64px; font-weight: 900; color: #fff; line-height: 1; display: block; }
+    .gift-price-right .label { font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 22px; display: block; }
+
+    /* EMAIL */
+    .email-sect { background: var(--cream); text-align: center; }
+    .email-sect h2 { margin-bottom: 12px; }
+    .email-sect .body-lg { max-width: 500px; margin: 0 auto 36px; }
+    .email-form { display: flex; max-width: 440px; margin: 0 auto; border: 1.5px solid rgba(20,20,20,.18); }
+    .email-form input { flex: 1; padding: 15px 18px; border: none; background: #fff; font-size: 15px; font-family: 'DM Sans',sans-serif; outline: none; color: var(--dark); }
+    .email-form button { background: var(--red); color: #fff; border: none; padding: 15px 22px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans',sans-serif; }
+    .email-form button:hover { background: var(--pink); }
+    .email-fine { font-size: 12px; color: rgba(20,20,20,.38); margin-top: 12px; }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 64px 52px 28px; border-top: 1px solid rgba(255,255,255,.06); }
+    .footer-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: 52px; margin-bottom: 52px; }
+    .footer-brand { font-weight: 900; font-size: 18px; letter-spacing: .14em; color: var(--red); margin-bottom: 14px; }
+    .footer-tag { font-size: 14px; line-height: 1.7; color: rgba(240,230,208,.45); max-width: 300px; margin-bottom: 16px; }
+    .footer-contact { font-size: 13px; color: rgba(240,230,208,.4); }
+    .footer-h { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(240,230,208,.85); margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { color: rgba(240,230,208,.4); font-size: 14px; text-decoration: none; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(240,230,208,.3); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero, .about-split, .lifestyle-split, .proof-band { grid-template-columns: 1fr; }
+      .hero-img, .about-img { height: 55vw; }
+      .hero-text, .about-text, .ls-text, .proof-text { padding: 52px 28px; }
+      section { padding: 64px 24px; }
+      .grid-4 { grid-template-columns: repeat(2,1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .gift-card { flex-direction: column; }
+      .gift-img { flex: none; height: 280px; }
+      .gift-body { padding: 40px 28px; }
+      .gift-band { flex-direction: column; padding: 52px 24px; text-align: center; }
+      .gift-price-right { text-align: center; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ann">Free shipping on orders over $60 USD <b>·</b> Small-batch. Bold branding. Big flavour. <b>·</b> Now shipping across Canada</div>
+
+<nav>
+  <a class="logo" href="#">TROPHYWIFE</a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#howto">How To Use</a></li>
+    <li><a href="#wholesale">Wholesale</a></li>
+    <li><a href="#products" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img">
+    <img src="assets/hero.png" alt="TROPHYWIFE — You are the prize and so is this salt" />
+  </div>
+  <div class="hero-text">
+    <p class="eyebrow eyebrow-muted">Finishing Salt Co — Ottawa, ON</p>
+    <h1>You are the prize.<br><em>So is this salt.</em></h1>
+    <p class="hero-sub">Small-batch finishing salts that live in your bag, not your spice rack. For the girl who knows the difference a pinch can make.</p>
+    <div class="btns">
+      <a href="#products" class="btn btn-red">Shop The Salts</a>
+      <a href="#products" class="btn btn-outline">Get The Trophy Set</a>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <p class="eyebrow eyebrow-muted">The Philosophy</p>
+  <h2>Not your grandma's salt shaker.</h2>
+  <p class="body-lg body-lg-light">TROPHYWIFE isn't about a life stage — it's about taste. She knows a good flavour when she tastes it. Indulges in life's little luxuries. Keeps champagne in the fridge just because.</p>
+  <a href="#products" class="btn btn-cream">Shop The Collection</a>
+  <div class="pills">
+    <span class="pill">Small-Batch</span>
+    <span class="pill">Bold Branding</span>
+    <span class="pill">Big Flavour</span>
+    <span class="pill">Woman-Owned</span>
+    <span class="pill">Ottawa, ON</span>
+    <span class="pill">Salt As An Accessory</span>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-hdr">
+    <p class="eyebrow eyebrow-red">The Collection</p>
+    <h2>Four flavours. All her.</h2>
+    <p class="body-lg" style="max-width:560px;margin:0 auto;text-align:center;">Each one a different personality. Each one a statement. Which one are you? (You're allowed to be all four.)</p>
+  </div>
+
+  <div class="grid-4">
+    <div class="pcard">
+      <div class="pimg">
+        <div class="pbadge pbadge-hero">HERO SKU — FAN FAVOURITE</div>
+        <img src="assets/sku-spicy-citrus.png" alt="Spicy Citrus Finishing Salt" />
+      </div>
+      <div class="pbody">
+        <p class="pnum" data-slug="spicy-citrus">01 / Spicy Citrus</p>
+        <h3 class="pname">Spicy Citrus Finishing Salt</h3>
+        <p class="pdesc">Bright citrus heat meets fine finishing salt. For the girl who puts hot sauce on everything but wants to feel elevated about it.</p>
+        <div class="pfoot">
+          <span class="pprice">$18 <sub>USD</sub></span>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg">
+        <div class="pbadge">FINISHING SALT</div>
+        <img src="assets/sku-mocha.png" alt="Mocha Finishing Salt" />
+      </div>
+      <div class="pbody">
+        <p class="pnum">02 / Mocha</p>
+        <h3 class="pname">Mocha Finishing Salt</h3>
+        <p class="pdesc">Dark, rich, and a little unexpected. Roasted cocoa, espresso, sea salt. The plot twist your steak — and your ice cream — didn't know they needed.</p>
+        <div class="pfoot">
+          <span class="pprice">$18 <sub>USD</sub></span>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg">
+        <div class="pbadge">FINISHING SALT</div>
+        <img src="assets/sku-black-garlic.png" alt="Black Garlic Finishing Salt" />
+      </div>
+      <div class="pbody">
+        <p class="pnum">03 / Black Garlic</p>
+        <h3 class="pname">Black Garlic Finishing Salt</h3>
+        <p class="pdesc">Fermented black garlic, ancho chili, espresso. Rich, deep umami. The caviar of salts — everything bagel? We don't know her.</p>
+        <div class="pfoot">
+          <span class="pprice">$18 <sub>USD</sub></span>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pimg">
+        <div class="pbadge">FINISHING SALT</div>
+        <img src="assets/sku-green-goddess.png" alt="Lemon Herb Finishing Salt" />
+      </div>
+      <div class="pbody">
+        <p class="pnum">04 / Lemon Herb</p>
+        <h3 class="pname">Lemon Herb Finishing Salt</h3>
+        <p class="pdesc">Lemon juice, dill, tarragon. Fresh, herby, bright. Just clean enough to make you feel like you're making good choices — without actually making you be good about it.</p>
+        <div class="pfoot">
+          <span class="pprice">$18 <sub>USD</sub></span>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift Set -->
+  <div class="gift-card">
+    <div class="gift-img">
+      <img src="assets/product-hands.png" alt="The Trophy Set — all 4 Trophy Wife Finishing Salts" />
+    </div>
+    <div class="gift-body">
+      <p class="eyebrow eyebrow-muted">Best Seller</p>
+      <h2>The Trophy Set</h2>
+      <p>Can't decide? That's a personality trait, not a problem. The Trophy Set is our 3-jar sampler in a gift box that looks like you put actual effort in. Pick any three. Keep them (ideal) or give them away (very generous of you).</p>
+      <div class="gift-price">$48 <sub>USD</sub></div>
+      <a href="#" class="btn btn-pink">Get The Trophy Set →</a>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE SPLIT — the 9/10 editorial boots shot -->
+<div class="lifestyle-split">
+  <div class="ls-img">
+    <img src="assets/lifestyle.png" alt="Trophy Wife Finishing Salt — not a pantry item, an accessory" />
+  </div>
+  <div class="ls-text">
+    <p class="eyebrow eyebrow-muted">The Concept</p>
+    <h2>Not a pantry item.<br>An accessory.</h2>
+    <p>Trophy Wife Finishing Salt lives in your clutch at dinner. Your coat pocket at the market. Your desk drawer at work because the salad from the place down the street is fine but could be better.</p>
+    <ul class="use-list">
+      <li><span class="dot"></span><span><strong>Girls Night</strong> — in your clutch, next to the lip gloss</span></li>
+      <li><span class="dot"></span><span><strong>Dinner Party</strong> — on the table in a pinch bowl. Watch it become the conversation.</span></li>
+      <li><span class="dot"></span><span><strong>Work Lunch</strong> — desk drawer, always. For the sad salad that deserves better.</span></li>
+      <li><span class="dot"></span><span><strong>The Afters</strong> — because late-night snacks hit differently with intention.</span></li>
+    </ul>
+    <a href="#products" class="btn btn-cream">Shop The Collection</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-split" id="about">
+  <div class="about-img">
+    <img src="assets/about.png" alt="Sakeisha — Founder, Trophy Wife Finishing Salt Co" />
+  </div>
+  <div class="about-text">
+    <p class="eyebrow eyebrow-red">The Story</p>
+    <h2>Born in Ottawa.<br>Made for everywhere.</h2>
+    <p>Sakeisha — founder, flavour obsessive, and the person who genuinely keeps champagne in the fridge for no particular occasion — started making small-batch finishing salts because she wanted a condiment that matched the way she moved through the world: with personality, with intention, and with enough boldness to start a conversation.</p>
+    <p>She made them for herself. Her friends asked where they could buy them. A brand was born.</p>
+    <a href="#" class="btn btn-red">Read Our Story</a>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<section class="howto" id="howto">
+  <div class="howto-hdr">
+    <p class="eyebrow eyebrow-red">How To Use</p>
+    <h2>The five-minute finishing school.</h2>
+    <p class="body-lg" style="text-align:center;max-width:520px;margin:0 auto;">Finishing salt is embarrassingly easy to use. Here's the whole curriculum.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <p class="step-n">Step 01</p>
+      <h4>The Pinch-and-Finish</h4>
+      <p>Cook. Plate. Pinch from 10 inches above. Eat. Accept compliments. Professional chefs do this. Now you do too.</p>
+    </div>
+    <div class="step">
+      <p class="step-n">Step 02</p>
+      <h4>The Egg Upgrade</h4>
+      <p>The Black Garlic salt makes a fried egg taste like culinary school. The Spicy Citrus makes avocado toast taste like $22. All eggs benefit. Always.</p>
+    </div>
+    <div class="step">
+      <p class="step-n">Step 03</p>
+      <h4>The Sweet-Savory Move</h4>
+      <p>Mocha finishing salt on vanilla ice cream will make your guests lose their minds in a quiet, civilized way. This is not a party trick. This is a lifestyle.</p>
+    </div>
+    <div class="step">
+      <p class="step-n">Step 04</p>
+      <h4>The Bag Move</h4>
+      <p>Throw it in your bag the next time you're going out to dinner or a rooftop situation. Pull it out. Use it. Someone will ask what it is. That's the whole point.</p>
+    </div>
+    <div class="step">
+      <p class="step-n">Step 05</p>
+      <h4>The Cocktail Rim</h4>
+      <p>Spicy Citrus on a margarita rim. Lemon Herb on a gin gimlet. Mocha on an espresso martini. The bar is raised. You raised it.</p>
+    </div>
+    <div class="step">
+      <p class="step-n">Step 06</p>
+      <h4>The Hosting Hack</h4>
+      <p>Serve in a small bowl on the table. Let guests discover it. You didn't just cook dinner — you curated an experience. That's a Trophy Wife move.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF + PHOTO BAND -->
+<div class="proof-band">
+  <div class="proof-img">
+    <img src="assets/margarita.png" alt="Trophy Wife Finishing Salt — Margarita Night with Spicy Citrus" />
+  </div>
+  <div class="proof-text">
+    <p class="eyebrow eyebrow-muted">Reviews</p>
+    <h2>She put it on everything.<br>So will you.</h2>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">"I brought this to a dinner party and people asked where I bought my salt. WHERE I BOUGHT MY SALT. This is the product."</p>
+        <p class="tauthor">Verified Buyer</p>
+      </div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">"The Spicy Citrus is currently living in my handbag. I am not ashamed. I've used it at three restaurants this week."</p>
+        <p class="tauthor">Verified Buyer</p>
+      </div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">"I gave the Trophy Set as a birthday gift and she's already reordered for herself. Mission accomplished."</p>
+        <p class="tauthor">Verified Buyer</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GIFT BAND -->
+<div class="gift-band">
+  <div>
+    <h2>Can't decide? That's a personality trait, not a problem.</h2>
+    <p>The Trophy Set is our 3-jar sampler in a gift box that looks like you put actual effort in. Pick any three salts. Keep them for yourself (ideal) or give them as a gift (acceptable). $48 USD. Best $48 you'll spend this month that isn't on dinner.</p>
+  </div>
+  <div class="gift-price-right">
+    <span class="label">The Trophy Set</span>
+    <span class="amount">$48<sub> USD</sub></span>
+    <a href="#products" class="btn btn-cream">Get The Set</a>
+  </div>
+</div>
+
+<!-- EMAIL -->
+<section class="email-sect">
+  <p class="eyebrow eyebrow-red">The Club</p>
+  <h2>Join the club. Get the good stuff first.</h2>
+  <p class="body-lg">New drops, recipes, first access to limited batches. No spam. We have better things to do.</p>
+  <form class="email-form" onsubmit="return false;">
+    <input type="email" placeholder="Your email, please." />
+    <button>I'm In</button>
+  </form>
+  <p class="email-fine">Unsubscribe anytime. We won't be offended. (We will be a little sad.)</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">TROPHYWIFE</div>
+      <p class="footer-tag">Small-batch finishing salts from Ottawa, ON. Bold branding. Big flavour. You are the prize and so is this salt.</p>
+      <p class="footer-contact">Hello@trophywife.ca</p>
+    </div>
+    <div>
+      <p class="footer-h">Shop</p>
+      <ul class="footer-links">
+        <li><a href="#">All Salts</a></li>
+        <li><a href="#">The Trophy Set</a></li>
+        <li><a href="#">Limited Drops</a></li>
+        <li><a href="#" id="wholesale">Wholesale Inquiry</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-h">Company</p>
+      <ul class="footer-links">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">How To Use</a></li>
+        <li><a href="#">Recipes</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">@eattrophywife</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TROPHYWIFE Finishing Salt Co — Ottawa, ON, Canada</span>
+    <span>Designed for the girl who keeps champagne in the fridge just because.</span>
+  </div>
+</footer>
+
+</body>
+</html>
+
+<!-- ═══════════════════════════════════════════════════
+     SHOPIFY BUY BUTTON INTEGRATION
+     Storefront API: 21a8a3a9e409e56c0240da544e0f59b0
+     Store: bexhn7-dp.myshopify.com
+════════════════════════════════════════════════════ -->
+<script>
+// ─── Shopify Storefront Config ───
+const SHOPIFY_STORE = 'bexhn7-dp.myshopify.com';
+const STOREFRONT_TOKEN = '21a8a3a9e409e56c0240da544e0f59b0';
+
+// ─── Variant IDs (from Shopify) ───
+const VARIANTS = {
+  'spicy-citrus':  '47407966585080',
+  'mocha':         '47407968223480',
+  'black-garlic':  '47407968092408',
+  'lemon-herb':    '47407968420088',
+};
+
+// ─── Cart State ───
+let cartId = null;
+let cartCount = 0;
+
+// ─── GraphQL Helper ───
+async function sfetch(query, variables = {}) {
+  const res = await fetch(`https://${SHOPIFY_STORE}/api/2024-01/graphql.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
+    },
+    body: JSON.stringify({ query, variables }),
+  });
+  return res.json();
+}
+
+// ─── Create Cart ───
+async function createCart() {
+  const data = await sfetch(`
+    mutation { cartCreate { cart { id checkoutUrl } } }
+  `);
+  cartId = data.data.cartCreate.cart.id;
+  return data.data.cartCreate.cart;
+}
+
+// ─── Add to Cart ───
+async function addToCart(variantId) {
+  if (!cartId) await createCart();
+  const data = await sfetch(`
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart { id totalQuantity checkoutUrl }
+      }
+    }
+  `, {
+    cartId,
+    lines: [{ merchandiseId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }]
+  });
+  const cart = data.data.cartLinesAdd.cart;
+  cartCount = cart.totalQuantity;
+  updateCartBadge();
+  showCartToast(cart.checkoutUrl);
+  return cart;
+}
+
+// ─── Update Cart Badge ───
+function updateCartBadge() {
+  const badge = document.getElementById('cart-badge');
+  if (badge) {
+    badge.textContent = cartCount;
+    badge.style.display = cartCount > 0 ? 'flex' : 'none';
+  }
+}
+
+// ─── Cart Toast ───
+function showCartToast(checkoutUrl) {
+  let toast = document.getElementById('tw-cart-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'tw-cart-toast';
+    toast.style.cssText = `
+      position:fixed; bottom:32px; right:32px; z-index:9999;
+      background:#141414; color:#F0E6D0; padding:20px 28px;
+      border-radius:2px; box-shadow:0 8px 32px rgba(0,0,0,0.35);
+      font-family:'DM Sans',sans-serif; font-size:14px;
+      display:flex; align-items:center; gap:16px;
+      transform:translateY(100px); opacity:0;
+      transition:transform .3s, opacity .3s;
+      max-width:340px;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `
+    <span>🧂</span>
+    <div style="flex:1">
+      <div style="font-weight:700;margin-bottom:4px">Added to cart</div>
+      <div style="opacity:.6;font-size:12px">${cartCount} item${cartCount !== 1 ? 's' : ''} in your cart</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <a href="${checkoutUrl}" style="background:#E94440;color:#fff;padding:8px 16px;border-radius:1px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.08em;text-align:center;white-space:nowrap">CHECKOUT</a>
+      <button onclick="document.getElementById('tw-cart-toast').style.opacity=0" style="background:transparent;border:1px solid rgba(240,230,208,.2);color:rgba(240,230,208,.6);padding:6px 16px;border-radius:1px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif">Keep Shopping</button>
+    </div>
+  `;
+  setTimeout(() => { toast.style.transform = 'translateY(0)'; toast.style.opacity = '1'; }, 50);
+  setTimeout(() => { toast.style.transform = 'translateY(100px)'; toast.style.opacity = '0'; }, 5000);
+}
+
+// ─── Wire up Add to Cart buttons on DOM ready ───
+document.addEventListener('DOMContentLoaded', () => {
+  // Map product slugs to buttons
+  const buttonMap = {
+    'spicy-citrus':  'btn-spicy-citrus',
+    'mocha':         'btn-mocha',
+    'black-garlic':  'btn-black-garlic',
+    'lemon-herb':    'btn-lemon-herb',
+  };
+
+  // Set data-product on cards by their pnum text
+  document.querySelectorAll('.pcard').forEach(card => {
+    const pnum = card.querySelector('.pnum');
+    if (pnum) {
+      const text = pnum.textContent.toLowerCase();
+      if (text.includes('spicy')) card.dataset.product = 'spicy-citrus';
+      else if (text.includes('mocha')) card.dataset.product = 'mocha';
+      else if (text.includes('black') || text.includes('garlic')) card.dataset.product = 'black-garlic';
+      else if (text.includes('lemon') || text.includes('herb')) card.dataset.product = 'lemon-herb';
+    }
+  });
+
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    // Find parent card and get product slug from data attribute or position
+    const card = btn.closest('.pcard');
+    if (card) {
+      const slug = card.dataset.product;
+      if (slug && VARIANTS[slug]) {
+        btn.addEventListener('click', async () => {
+          btn.textContent = 'Adding...';
+          btn.disabled = true;
+          try {
+            await addToCart(VARIANTS[slug]);
+            btn.textContent = '✓ Added';
+            setTimeout(() => { btn.textContent = 'Add to Cart'; btn.disabled = false; }, 2000);
+          } catch(e) {
+            btn.textContent = 'Add to Cart';
+            btn.disabled = false;
+          }
+        });
+      }
+    }
+  });
+
+  // Gift Set button
+  const giftBtn = document.querySelector('.btn-pink');
+  if (giftBtn) {
+    giftBtn.textContent = 'Get The Trophy Set →';
+    // For now link to Shopify store collection until Trophy Set product is added
+    giftBtn.href = `https://${SHOPIFY_STORE}/collections/all`;
+    giftBtn.target = '_blank';
+  }
+
+  // Add cart icon to nav
+  const nav = document.querySelector('nav');
+  if (nav) {
+    const cartEl = document.createElement('div');
+    cartEl.style.cssText = 'position:relative;cursor:pointer;display:flex;align-items:center;';
+    cartEl.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span id="cart-badge" style="display:none;position:absolute;top:-8px;right:-8px;background:#E94440;color:#fff;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;"></span>
+    `;
+    nav.appendChild(cartEl);
+  }
+});
+</script>
