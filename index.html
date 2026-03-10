@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@700,800,400,300&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TROPHYWIFE — Finishing Salt Co</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -17,7 +18,7 @@
       --gold:  #C9A84C;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+    body { font-family: 'Satoshi', 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
 
     /* ANN */
     .ann { background: var(--dark); color: var(--cream); text-align: center; padding: 11px; font-size: 12.5px; letter-spacing: .1em; font-weight: 500; }
@@ -40,11 +41,11 @@
     .eyebrow-red   { color: var(--red); }
     .eyebrow-pink  { color: var(--pink); }
     .eyebrow-muted { color: rgba(240,230,208,.45); }
-    h1 { font-family: 'Bodoni Moda', serif; font-weight: 900; font-size: clamp(42px,5vw,76px); line-height: 1.04; color: var(--cream); margin-bottom: 22px; }
+    h1 { font-family: 'Zodiak', 'Georgia', serif; font-weight: 900; font-size: clamp(42px,5vw,76px); line-height: 1.04; color: var(--cream); margin-bottom: 22px; }
     h1 em { font-style: italic; color: var(--pink); }
     .hero-sub { font-size: 16px; line-height: 1.75; color: rgba(240,230,208,.72); max-width: 420px; margin-bottom: 38px; }
     .btns { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; padding: 15px 30px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: opacity .15s, transform .15s; }
+    .btn { display: inline-flex; align-items: center; padding: 15px 30px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; cursor: pointer; border: none; font-family: 'Satoshi', 'DM Sans', sans-serif; transition: opacity .15s, transform .15s; }
     .btn:hover { opacity: .88; transform: translateY(-1px); }
     .btn-red     { background: var(--red);   color: #fff; }
     .btn-cream   { background: var(--cream); color: var(--dark); }
@@ -54,7 +55,7 @@
 
     /* SECTION */
     section { padding: 96px 52px; }
-    h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(28px,3.5vw,50px); font-weight: 900; line-height: 1.08; margin-bottom: 18px; }
+    h2 { font-family: 'Zodiak', 'Georgia', serif; font-size: clamp(28px,3.5vw,50px); font-weight: 900; line-height: 1.08; margin-bottom: 18px; }
     .body-lg { font-size: 17px; line-height: 1.75; color: rgba(20,20,20,.62); }
     .body-lg-light { color: rgba(240,230,208,.72); }
 
@@ -77,12 +78,12 @@
     .pbadge-hero { background: var(--pink); }
     .pbody { padding: 20px; }
     .pnum { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 5px; }
-    .pname { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+    .pname { font-family: 'Zodiak', 'Georgia', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
     .pdesc { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 18px; }
     .pfoot { display: flex; align-items: center; justify-content: space-between; }
     .pprice { font-size: 18px; font-weight: 700; }
     .pprice sub { font-size: 11px; color: #888; font-weight: 400; vertical-align: baseline; margin-left: 2px; }
-    .add-btn { background: var(--dark); color: #fff; border: none; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border-radius: 1px; font-family: 'DM Sans',sans-serif; transition: background .15s; }
+    .add-btn { background: var(--dark); color: #fff; border: none; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border-radius: 1px; font-family: 'Satoshi',sans-serif; transition: background .15s; }
     .add-btn:hover { background: var(--red); }
 
     /* GIFT CARD */
@@ -124,7 +125,7 @@
     .step:nth-child(even) { border-left-color: var(--pink); }
     .step-n { font-size: 10px; font-weight: 700; letter-spacing: .22em; color: var(--red); text-transform: uppercase; margin-bottom: 8px; }
     .step:nth-child(even) .step-n { color: var(--pink); }
-    .step h4 { font-family: 'Bodoni Moda', serif; font-size: 20px; font-weight: 700; margin-bottom: 9px; }
+    .step h4 { font-family: 'Zodiak', 'Georgia', serif; font-size: 20px; font-weight: 700; margin-bottom: 9px; }
     .step p { font-size: 14px; color: #555; line-height: 1.68; }
 
     /* SOCIAL PROOF / PHOTO BAND */
@@ -152,8 +153,8 @@
     .email-sect h2 { margin-bottom: 12px; }
     .email-sect .body-lg { max-width: 500px; margin: 0 auto 36px; }
     .email-form { display: flex; max-width: 440px; margin: 0 auto; border: 1.5px solid rgba(20,20,20,.18); }
-    .email-form input { flex: 1; padding: 15px 18px; border: none; background: #fff; font-size: 15px; font-family: 'DM Sans',sans-serif; outline: none; color: var(--dark); }
-    .email-form button { background: var(--red); color: #fff; border: none; padding: 15px 22px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans',sans-serif; }
+    .email-form input { flex: 1; padding: 15px 18px; border: none; background: #fff; font-size: 15px; font-family: 'Satoshi',sans-serif; outline: none; color: var(--dark); }
+    .email-form button { background: var(--red); color: #fff; border: none; padding: 15px 22px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'Satoshi',sans-serif; }
     .email-form button:hover { background: var(--pink); }
     .email-fine { font-size: 12px; color: rgba(20,20,20,.38); margin-top: 12px; }
 
@@ -606,7 +607,7 @@ function showCartToast(checkoutUrl) {
       position:fixed; bottom:32px; right:32px; z-index:9999;
       background:#141414; color:#F0E6D0; padding:20px 28px;
       border-radius:2px; box-shadow:0 8px 32px rgba(0,0,0,0.35);
-      font-family:'DM Sans',sans-serif; font-size:14px;
+      font-family:'Satoshi',sans-serif; font-size:14px;
       display:flex; align-items:center; gap:16px;
       transform:translateY(100px); opacity:0;
       transition:transform .3s, opacity .3s;
@@ -622,7 +623,7 @@ function showCartToast(checkoutUrl) {
     </div>
     <div style="display:flex;flex-direction:column;gap:8px">
       <a href="${checkoutUrl}" style="background:#E94440;color:#fff;padding:8px 16px;border-radius:1px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.08em;text-align:center;white-space:nowrap">CHECKOUT</a>
-      <button onclick="document.getElementById('tw-cart-toast').style.opacity=0" style="background:transparent;border:1px solid rgba(240,230,208,.2);color:rgba(240,230,208,.6);padding:6px 16px;border-radius:1px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif">Keep Shopping</button>
+      <button onclick="document.getElementById('tw-cart-toast').style.opacity=0" style="background:transparent;border:1px solid rgba(240,230,208,.2);color:rgba(240,230,208,.6);padding:6px 16px;border-radius:1px;cursor:pointer;font-size:11px;font-family:'Satoshi',sans-serif">Keep Shopping</button>
     </div>
   `;
   setTimeout(() => { toast.style.transform = 'translateY(0)'; toast.style.opacity = '1'; }, 50);
