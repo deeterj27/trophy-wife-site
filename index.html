@@ -263,6 +263,19 @@
       .grid-4 { grid-template-columns: 1fr; }
       .pcard .pimg { height: 72vw; }
     }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #F0E6D0; border-radius: 2px; transition: all .25s; }
+    .mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: #141414; padding: 24px; z-index: 999; flex-direction: column; gap: 0; border-top: 1px solid rgba(240,230,208,.12); }
+    .mobile-menu a { color: #F0E6D0; text-decoration: none; font-size: 15px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid rgba(240,230,208,.08); display: block; font-family: 'Satoshi', sans-serif; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu.open { display: flex; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -278,7 +291,27 @@
     <li><a href="#wholesale">Wholesale</a></li>
     <li><a href="#products" class="nav-cta">Shop Now</a></li>
   </ul>
+
+  <!-- Mobile hamburger -->
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()">Shop</a>
+  <a href="#about" onclick="closeMenu()">Our Story</a>
+  <a href="#recipe" onclick="closeMenu()">Recipes</a>
+  <a href="#stockists" onclick="closeMenu()">Stockists</a>
+  <a href="#" style="color:#E94440;font-weight:700" onclick="closeMenu()">Order Now</a>
+</div>
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+</script>
 
 <!-- HERO -->
 <div class="hero">
