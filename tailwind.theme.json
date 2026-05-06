@@ -1,0 +1,107 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#141414",
+        "secondary": "#5c5357",
+        "tertiary": "#c8242f",
+        "neutral": "#f0e6d0",
+        "trophy-pink": "#d61d6a",
+        "powder-blush": "#f7eaf2",
+        "butter-gold": "#d9a441",
+        "cinnamon": "#9b4a2d",
+        "pearl": "#fffaf0",
+        "on-dark": "#f0e6d0",
+        "on-hot": "#ffffff",
+        "on-light": "#141414"
+      },
+      "fontFamily": {
+        "logo": [
+          "Archivo Black"
+        ],
+        "h1": [
+          "Bodoni Moda"
+        ],
+        "h2": [
+          "Bodoni Moda"
+        ],
+        "h3": [
+          "Bodoni Moda"
+        ],
+        "body-md": [
+          "Satoshi"
+        ],
+        "label-caps": [
+          "Archivo"
+        ],
+        "button": [
+          "Archivo"
+        ]
+      },
+      "fontSize": {
+        "logo": [
+          "1.45rem",
+          {
+            "letterSpacing": "0.11em",
+            "fontWeight": "900"
+          }
+        ],
+        "h1": [
+          "5.25rem",
+          {
+            "letterSpacing": "-0.05em",
+            "fontWeight": "900"
+          }
+        ],
+        "h2": [
+          "3.5rem",
+          {
+            "letterSpacing": "-0.04em",
+            "fontWeight": "900"
+          }
+        ],
+        "h3": [
+          "1.65rem",
+          {
+            "letterSpacing": "-0.03em",
+            "fontWeight": "800"
+          }
+        ],
+        "body-md": [
+          "1rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "label-caps": [
+          "0.72rem",
+          {
+            "letterSpacing": "0.16em",
+            "fontWeight": "900"
+          }
+        ],
+        "button": [
+          "0.78rem",
+          {
+            "letterSpacing": "0.12em",
+            "fontWeight": "900"
+          }
+        ]
+      },
+      "borderRadius": {
+        "none": "0px",
+        "sm": "2px",
+        "md": "8px",
+        "pill": "9999px"
+      },
+      "spacing": {
+        "xs": "6px",
+        "sm": "10px",
+        "md": "18px",
+        "lg": "28px",
+        "xl": "52px",
+        "xxl": "96px"
+      }
+    }
+  }
+}

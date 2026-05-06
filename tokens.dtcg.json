@@ -1,0 +1,308 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Glossy finishing salt as a fashion accessory — cheeky, collectible, premium, and built to stop the scroll.",
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.078,
+          0.078,
+          0.078
+        ],
+        "hex": "#141414"
+      }
+    },
+    "secondary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.361,
+          0.325,
+          0.341
+        ],
+        "hex": "#5c5357"
+      }
+    },
+    "tertiary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.784,
+          0.141,
+          0.184
+        ],
+        "hex": "#c8242f"
+      }
+    },
+    "neutral": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.941,
+          0.902,
+          0.816
+        ],
+        "hex": "#f0e6d0"
+      }
+    },
+    "trophy-pink": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.839,
+          0.114,
+          0.416
+        ],
+        "hex": "#d61d6a"
+      }
+    },
+    "powder-blush": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.969,
+          0.918,
+          0.949
+        ],
+        "hex": "#f7eaf2"
+      }
+    },
+    "butter-gold": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.851,
+          0.643,
+          0.255
+        ],
+        "hex": "#d9a441"
+      }
+    },
+    "cinnamon": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.608,
+          0.29,
+          0.176
+        ],
+        "hex": "#9b4a2d"
+      }
+    },
+    "pearl": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.98,
+          0.941
+        ],
+        "hex": "#fffaf0"
+      }
+    },
+    "on-dark": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.941,
+          0.902,
+          0.816
+        ],
+        "hex": "#f0e6d0"
+      }
+    },
+    "on-hot": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      }
+    },
+    "on-light": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.078,
+          0.078,
+          0.078
+        ],
+        "hex": "#141414"
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "xs": {
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      }
+    },
+    "xl": {
+      "$value": {
+        "value": 52,
+        "unit": "px"
+      }
+    },
+    "xxl": {
+      "$value": {
+        "value": 96,
+        "unit": "px"
+      }
+    }
+  },
+  "rounded": {
+    "$type": "dimension",
+    "none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "pill": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      }
+    }
+  },
+  "typography": {
+    "logo": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Archivo Black",
+        "fontSize": {
+          "value": 1.45,
+          "unit": "rem"
+        },
+        "fontWeight": 900,
+        "letterSpacing": {
+          "value": 0.11,
+          "unit": "em"
+        }
+      }
+    },
+    "h1": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Bodoni Moda",
+        "fontSize": {
+          "value": 5.25,
+          "unit": "rem"
+        },
+        "fontWeight": 900,
+        "letterSpacing": {
+          "value": -0.05,
+          "unit": "em"
+        }
+      }
+    },
+    "h2": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Bodoni Moda",
+        "fontSize": {
+          "value": 3.5,
+          "unit": "rem"
+        },
+        "fontWeight": 900,
+        "letterSpacing": {
+          "value": -0.04,
+          "unit": "em"
+        }
+      }
+    },
+    "h3": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Bodoni Moda",
+        "fontSize": {
+          "value": 1.65,
+          "unit": "rem"
+        },
+        "fontWeight": 800,
+        "letterSpacing": {
+          "value": -0.03,
+          "unit": "em"
+        }
+      }
+    },
+    "body-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Satoshi",
+        "fontSize": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "fontWeight": 400
+      }
+    },
+    "label-caps": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Archivo",
+        "fontSize": {
+          "value": 0.72,
+          "unit": "rem"
+        },
+        "fontWeight": 900,
+        "letterSpacing": {
+          "value": 0.16,
+          "unit": "em"
+        }
+      }
+    },
+    "button": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Archivo",
+        "fontSize": {
+          "value": 0.78,
+          "unit": "rem"
+        },
+        "fontWeight": 900,
+        "letterSpacing": {
+          "value": 0.12,
+          "unit": "em"
+        }
+      }
+    }
+  }
+}
