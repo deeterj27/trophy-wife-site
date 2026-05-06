@@ -137,8 +137,9 @@ Lead with a campaign moment, not a product grid. The preferred homepage flow is:
 9. Founder/story proof.
 10. Five-minute finishing school.
 11. Social proof / content tile.
-12. Final bundle CTA.
-13. Club/email capture.
+12. Club/email capture.
+
+Do not run two full Trophy Set sales modules on the same page. Keep one strong bundle upsell directly after the product cards, then use lighter shop/club CTAs later.
 
 Keep grids tidy enough to shop, but interrupt long runs with campaign strips, oversized type, sticker badges, and close-cropped photography. Product cards should feel collectible and beauty-adjacent, not grocery catalog.
 
