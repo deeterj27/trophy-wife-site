@@ -217,9 +217,10 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      nav { padding: 0 20px; }
+      nav { padding: 0 20px; gap: 16px; }
       .nav-links { display: none; }
       .hero, .about-split, .lifestyle-split, .proof-band { grid-template-columns: 1fr; }
+      .hero { min-height: 0; }
       .hero-img, .about-img { height: 60vw; }
       .hero-img img { object-position: center 25% !important; }
       .hero-text, .about-text, .ls-text, .proof-text { padding: 52px 28px; }
@@ -268,7 +269,7 @@
     }
 
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: #F0E6D0; border-radius: 2px; transition: all .25s; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .25s; }
     .mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: #141414; padding: 24px; z-index: 999; flex-direction: column; gap: 0; border-top: 1px solid rgba(240,230,208,.12); }
     .mobile-menu a { color: #F0E6D0; text-decoration: none; font-size: 15px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid rgba(240,230,208,.08); display: block; font-family: 'Satoshi', sans-serif; }
     .mobile-menu a:last-child { border-bottom: none; }
