@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-label="TROPHYWIFE Cinnamon Sugar Finishing Salt">
+  <rect width="1200" height="1200" fill="#F0E6D0"/>
+  <rect width="1200" height="210" fill="#A85B2A"/>
+  <rect y="1020" width="1200" height="180" fill="#141414"/>
+  <circle cx="120" cy="620" r="300" fill="#D61D6A"/>
+  <circle cx="1040" cy="520" r="270" fill="#A85B2A"/>
+  <ellipse cx="600" cy="940" rx="245" ry="50" fill="#000" opacity=".22"/>
+  <rect x="390" y="225" width="420" height="705" rx="62" fill="#fffaf0" stroke="#141414" stroke-width="8"/>
+  <rect x="455" y="145" width="290" height="140" rx="34" fill="#141414"/>
+  <rect x="470" y="120" width="260" height="60" fill="#141414"/>
+  <rect x="430" y="390" width="340" height="330" rx="8" fill="#A85B2A" stroke="#141414" stroke-width="5"/>
+  <text x="600" y="452" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#F0E6D0" letter-spacing="5">TROPHYWIFE</text>
+  <text x="600" y="545" text-anchor="middle" font-family="Georgia, serif" font-size="84" font-weight="900" fill="#fffaf0">CINNAMON</text>
+  <text x="600" y="625" text-anchor="middle" font-family="Georgia, serif" font-size="84" font-weight="900" fill="#fffaf0">SUGAR</text>
+  <text x="600" y="687" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#141414" letter-spacing="2">FINISHING SALT</text>
+  <text x="600" y="805" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#141414" letter-spacing="3">WARM + SWEET</text>
+  <text x="600" y="1055" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#F0E6D0" letter-spacing="3">SMALL-BATCH · BOLD FLAVOUR · $18 USD</text>
+</svg>

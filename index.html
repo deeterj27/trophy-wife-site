@@ -3,7 +3,7 @@
 <head>
 
   <!-- SEO & Security -->
-  <meta name="description" content="Trophy Wife Finishing Salt Co — small-batch finishing salts made by hand in Ottawa. Spicy Citrus, Mocha, Black Garlic, and Lemon Herb. You are the prize, and so is this salt.">
+  <meta name="description" content="Trophy Wife Finishing Salt Co — small-batch finishing salts made by hand in Ottawa. Spicy Citrus, Garlic Butter, and Cinnamon Sugar. You are the prize, and so is this salt.">
   <meta name="keywords" content="finishing salt, small batch salt, gourmet salt, fancy salt, CPG, Ottawa, Sakeisha, Trophy Wife">
     <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://eattrophywife.com/">
   <meta property="og:title" content="Trophy Wife Finishing Salt Co — You are the prize.">
-  <meta property="og:description" content="Small-batch finishing salts that live in your bag, not your spice rack. Spicy Citrus, Mocha, Black Garlic, Lemon Herb. Ottawa-made.">
+  <meta property="og:description" content="Small-batch finishing salts that live in your bag, not your spice rack. Spicy Citrus, Garlic Butter, Cinnamon Sugar. Ottawa-made.">
   <meta property="og:image" content="https://eattrophywife.com/assets/hero.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -113,18 +113,18 @@
     /* PRODUCTS */
     .products { background: var(--lav); }
     .products-hdr { text-align: center; margin-bottom: 60px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1260px; margin: 0 auto 24px; }
-    .pcard { background: #fff; border-radius: 2px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .grid-4 { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; max-width: 1120px; margin: 0 auto 28px; }
+    .pcard { background: #fff; border-radius: 2px; overflow: hidden; transition: transform .2s, box-shadow .2s; display:flex; flex-direction:column; min-height:100%; border:1px solid rgba(20,20,20,.06); }
     .pcard:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
     .pimg { height: 260px; overflow: hidden; position: relative; }
     .pimg img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
     .pbadge { position: absolute; top: 0; left: 0; right: 0; background: var(--red); color: #fff; text-align: center; padding: 8px; font-size: 11px; font-weight: 900; letter-spacing: .12em; }
     .pbadge-hero { background: var(--pink); }
-    .pbody { padding: 20px; }
+    .pbody { padding: 22px; display:flex; flex-direction:column; flex:1; }
     .pnum { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 5px; }
     .pname { font-family: 'Zodiak', 'Georgia', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
-    .pdesc { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 18px; }
-    .pfoot { display: flex; align-items: center; justify-content: space-between; }
+    .pdesc { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 18px; min-height:64px; }
+    .pfoot { display: flex; align-items: center; justify-content: space-between; margin-top:auto; gap:14px; }
     .pprice { font-size: 18px; font-weight: 700; }
     .pprice sub { font-size: 11px; color: #888; font-weight: 400; vertical-align: baseline; margin-left: 2px; }
     .add-btn { background: var(--dark); color: #fff; border: none; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; border-radius: 1px; font-family: 'Satoshi',sans-serif; transition: background .15s; }
@@ -262,7 +262,7 @@
       .footer-links { gap: 12px; }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 520px) {
       .grid-4 { grid-template-columns: 1fr; }
       .pcard .pimg { height: 72vw; }
     }
@@ -283,7 +283,7 @@
 </head>
 <body>
 
-<div class="ann">Free shipping on orders over $60 USD <b>·</b> Small-batch. Bold branding. Big flavour. <b>·</b> Now shipping across Canada</div>
+<div class="ann">Free shipping on orders over $60 USD <b>·</b> Spicy Citrus, Garlic Butter, Cinnamon Sugar <b>·</b> Small-batch finishing salts</div>
 
 <nav>
   <a class="logo" href="#">TROPHYWIFE</a>
@@ -327,7 +327,7 @@ function closeMenu() {
     <p class="hero-sub">Small-batch finishing salts that live in your bag, not your spice rack. For the girl who knows the difference a pinch can make.</p>
     <div class="btns">
       <a href="#products" class="btn btn-red">Shop The Salts</a>
-      <a href="#products" class="btn btn-outline">Get The Trophy Set</a>
+      <a href="https://bexhn7-dp.myshopify.com/products/the-trophy-set" class="btn btn-outline">Get The Trophy Set</a>
     </div>
   </div>
 </div>
@@ -352,20 +352,20 @@ function closeMenu() {
 <section class="products" id="products">
   <div class="products-hdr">
     <p class="eyebrow eyebrow-red">The Collection</p>
-    <h2>Four flavours. All her.</h2>
-    <p class="body-lg" style="max-width:560px;margin:0 auto;text-align:center;">Each one a different personality. Each one a statement. Which one are you? (You're allowed to be all four.)</p>
+    <h2>Three flavours. All her.</h2>
+    <p class="body-lg" style="max-width:560px;margin:0 auto;text-align:center;">Three core flavours. One tight collection. Pick your personality, then put it on everything.</p>
   </div>
 
   <div class="grid-4">
-    <div class="pcard">
+    <div class="pcard" data-product="spicy-citrus">
       <div class="pimg">
         <div class="pbadge pbadge-hero">HERO SKU — FAN FAVOURITE</div>
-        <img src="assets/sku-spicy-citrus.png" alt="Spicy Citrus Finishing Salt" />
+        <img src="assets/sku-spicy-citrus.svg" alt="Spicy Citrus Finishing Salt" />
       </div>
       <div class="pbody">
         <p class="pnum" data-slug="spicy-citrus">01 / Spicy Citrus</p>
         <h3 class="pname">Spicy Citrus Finishing Salt</h3>
-        <p class="pdesc">Bright citrus heat meets fine finishing salt. For the girl who puts hot sauce on everything but wants to feel elevated about it.</p>
+        <p class="pdesc">Bright citrus heat and flaky salt for avocado toast, margarita rims, grilled fish, mango, watermelon, and every meal that needs a little main-character energy.</p>
         <div class="pfoot">
           <span class="pprice">$18 <sub>USD</sub></span>
           <button class="add-btn">Add to Cart</button>
@@ -373,15 +373,15 @@ function closeMenu() {
       </div>
     </div>
 
-    <div class="pcard">
+    <div class="pcard" data-product="garlic-butter">
       <div class="pimg">
-        <div class="pbadge">FINISHING SALT</div>
-        <img src="assets/sku-mocha.png" alt="Mocha Finishing Salt" />
+        <div class="pbadge">NEW CORE FLAVOUR</div>
+        <img src="assets/sku-garlic-butter.svg" alt="Garlic Butter Finishing Salt" />
       </div>
       <div class="pbody">
-        <p class="pnum">02 / Mocha</p>
-        <h3 class="pname">Mocha Finishing Salt</h3>
-        <p class="pdesc">Dark, rich, and a little unexpected. Roasted cocoa, espresso, sea salt. The plot twist your steak — and your ice cream — didn't know they needed.</p>
+        <p class="pnum" data-slug="garlic-butter">02 / Garlic Butter</p>
+        <h3 class="pname">Garlic Butter Finishing Salt</h3>
+        <p class="pdesc">Rich, savory, and immediately useful. Finish pasta, potatoes, steak, eggs, popcorn, and roasted vegetables like they came with a reservation.</p>
         <div class="pfoot">
           <span class="pprice">$18 <sub>USD</sub></span>
           <button class="add-btn">Add to Cart</button>
@@ -389,31 +389,15 @@ function closeMenu() {
       </div>
     </div>
 
-    <div class="pcard">
+    <div class="pcard" data-product="cinnamon-sugar">
       <div class="pimg">
-        <div class="pbadge">FINISHING SALT</div>
-        <img src="assets/sku-black-garlic.png" alt="Black Garlic Finishing Salt" />
+        <div class="pbadge">NEW CORE FLAVOUR</div>
+        <img src="assets/sku-cinnamon-sugar.svg" alt="Cinnamon Sugar Finishing Salt" />
       </div>
       <div class="pbody">
-        <p class="pnum">03 / Black Garlic</p>
-        <h3 class="pname">Black Garlic Finishing Salt</h3>
-        <p class="pdesc">Fermented black garlic, ancho chili, espresso. Rich, deep umami. The caviar of salts — everything bagel? We don't know her.</p>
-        <div class="pfoot">
-          <span class="pprice">$18 <sub>USD</sub></span>
-          <button class="add-btn">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pimg">
-        <div class="pbadge">FINISHING SALT</div>
-        <img src="assets/sku-green-goddess.png" alt="Lemon Herb Finishing Salt" />
-      </div>
-      <div class="pbody">
-        <p class="pnum">04 / Lemon Herb</p>
-        <h3 class="pname">Lemon Herb Finishing Salt</h3>
-        <p class="pdesc">Lemon juice, dill, tarragon. Fresh, herby, bright. Just clean enough to make you feel like you're making good choices — without actually making you be good about it.</p>
+        <p class="pnum" data-slug="cinnamon-sugar">03 / Cinnamon Sugar</p>
+        <h3 class="pname">Cinnamon Sugar Finishing Salt</h3>
+        <p class="pdesc">Warm cinnamon sugar with a mineral salt finish. Built for buttered toast, fruit, ice cream, brownies, French toast, lattes, and late-night snacks.</p>
         <div class="pfoot">
           <span class="pprice">$18 <sub>USD</sub></span>
           <button class="add-btn">Add to Cart</button>
@@ -425,12 +409,12 @@ function closeMenu() {
   <!-- Gift Set -->
   <div class="gift-card">
     <div class="gift-img">
-      <img src="assets/product-hands.png" alt="The Trophy Set — all 4 Trophy Wife Finishing Salts" />
+      <img src="assets/product-hands.png" alt="The Trophy Set — three Trophy Wife Finishing Salts" />
     </div>
     <div class="gift-body">
       <p class="eyebrow eyebrow-muted">Best Seller</p>
       <h2>The Trophy Set</h2>
-      <p>Can't decide? That's a personality trait, not a problem. The Trophy Set is our 4-pouch sampler in a gift box that looks like you put actual effort in. All four flavours. Keep them (ideal) or give them away (very generous of you).</p>
+      <p>Can't decide? That's a personality trait, not a problem. The Trophy Set is our 3-jar core collection in a gift box that looks like you put actual effort in. Spicy Citrus, Garlic Butter, and Cinnamon Sugar. Keep them (ideal) or give them away (very generous of you).</p>
       <div class="gift-price">$48 <sub>USD</sub></div>
       <a href="#" class="btn btn-pink">Get The Trophy Set →</a>
     </div>
@@ -486,12 +470,12 @@ function closeMenu() {
     <div class="step">
       <p class="step-n">Step 02</p>
       <h4>The Egg Upgrade</h4>
-      <p>The Black Garlic salt makes a fried egg taste like culinary school. The Spicy Citrus makes avocado toast taste like $22. All eggs benefit. Always.</p>
+      <p>Garlic Butter makes a fried egg taste like culinary school. Spicy Citrus makes avocado toast taste like $22. Cinnamon Sugar turns French toast into a personality trait.</p>
     </div>
     <div class="step">
       <p class="step-n">Step 03</p>
       <h4>The Sweet-Savory Move</h4>
-      <p>Mocha finishing salt on vanilla ice cream will make your guests lose their minds in a quiet, civilized way. This is not a party trick. This is a lifestyle.</p>
+      <p>Cinnamon Sugar finishing salt on vanilla ice cream will make your guests lose their minds in a quiet, civilized way. This is not a party trick. This is a lifestyle.</p>
     </div>
     <div class="step">
       <p class="step-n">Step 04</p>
@@ -501,7 +485,7 @@ function closeMenu() {
     <div class="step">
       <p class="step-n">Step 05</p>
       <h4>The Cocktail Rim</h4>
-      <p>Spicy Citrus on a margarita rim. Lemon Herb on a gin gimlet. Mocha on an espresso martini. The bar is raised. You raised it.</p>
+      <p>Spicy Citrus on a margarita rim. Cinnamon Sugar on an espresso martini or hot toddy. Garlic Butter on the popcorn bowl next to the drinks. The bar is raised. You raised it.</p>
     </div>
     <div class="step">
       <p class="step-n">Step 06</p>
@@ -543,7 +527,7 @@ function closeMenu() {
 <div class="gift-band">
   <div>
     <h2>Can't decide? That's a personality trait, not a problem.</h2>
-    <p>The Trophy Set is our 3-jar sampler in a gift box that looks like you put actual effort in. All four flavours — Spicy Citrus, Mocha, Black Garlic, and Lemon Herb. Keep them for yourself (ideal) or give them as a gift (acceptable). $48 USD. Best $48 you'll spend this month that isn't on dinner.</p>
+    <p>The Trophy Set is our 3-jar sampler in a gift box that looks like you put actual effort in. All four flavours — Spicy Citrus, Garlic Butter, and Cinnamon Sugar. Keep them for yourself (ideal) or give them as a gift (acceptable). $48 USD. Best $48 you'll spend this month that isn't on dinner.</p>
   </div>
   <div class="gift-price-right">
     <span class="label">The Trophy Set</span>
@@ -614,10 +598,9 @@ const STOREFRONT_TOKEN = '21a8a3a9e409e56c0240da544e0f59b0';
 
 // ─── Variant IDs (from Shopify) ───
 const VARIANTS = {
-  'spicy-citrus':  '47407966585080',
-  'mocha':         '47407968223480',
-  'black-garlic':  '47407968092408',
-  'lemon-herb':    '47407968420088',
+  'spicy-citrus':    '47407966585080',
+  'garlic-butter':   '48329990603000',
+  'cinnamon-sugar':  '48329990930680',
 };
 
 // ─── Cart State ───
@@ -712,10 +695,9 @@ function showCartToast(checkoutUrl) {
 document.addEventListener('DOMContentLoaded', () => {
   // Map product slugs to buttons
   const buttonMap = {
-    'spicy-citrus':  'btn-spicy-citrus',
-    'mocha':         'btn-mocha',
-    'black-garlic':  'btn-black-garlic',
-    'lemon-herb':    'btn-lemon-herb',
+    'spicy-citrus':    'btn-spicy-citrus',
+    'garlic-butter':   'btn-garlic-butter',
+    'cinnamon-sugar':  'btn-cinnamon-sugar',
   };
 
   // Set data-product on cards by their pnum text
@@ -724,9 +706,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pnum) {
       const text = pnum.textContent.toLowerCase();
       if (text.includes('spicy')) card.dataset.product = 'spicy-citrus';
-      else if (text.includes('mocha')) card.dataset.product = 'mocha';
-      else if (text.includes('black') || text.includes('garlic')) card.dataset.product = 'black-garlic';
-      else if (text.includes('lemon') || text.includes('herb')) card.dataset.product = 'lemon-herb';
+      else if (text.includes('garlic') || text.includes('butter')) card.dataset.product = 'garlic-butter';
+      else if (text.includes('cinnamon') || text.includes('sugar')) card.dataset.product = 'cinnamon-sugar';
     }
   });
 
@@ -756,8 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const giftBtn = document.querySelector('.btn-pink');
   if (giftBtn) {
     giftBtn.textContent = 'Get The Trophy Set →';
-    // For now link to Shopify store collection until Trophy Set product is added
-    giftBtn.href = `https://${SHOPIFY_STORE}/collections/all`;
+    giftBtn.href = `https://${SHOPIFY_STORE}/products/the-trophy-set`;
     giftBtn.target = '_blank';
   }
 
