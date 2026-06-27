@@ -119,8 +119,8 @@
     .grid-4 { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; max-width: 1120px; margin: 0 auto 28px; }
     .pcard { background: #fffaf0; border-radius: 2px; overflow: hidden; transition: transform .2s, box-shadow .2s; display:flex; flex-direction:column; min-height:100%; border:2px solid var(--dark); box-shadow: 8px 8px 0 rgba(20,20,20,.08); position:relative; }
     .pcard:hover { transform: translate(-2px,-6px) rotate(-.35deg); box-shadow: 12px 14px 0 rgba(214,29,106,.18), 0 20px 50px rgba(0,0,0,.12); }
-    .pimg { height: 260px; overflow: hidden; position: relative; }
-    .pimg img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .pimg { height: 320px; overflow: hidden; position: relative; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(245,238,248,.95) 100%); padding: 22px 18px 10px; }
+    .pimg img { width: 100%; height: 100%; object-fit: contain; object-position: center; filter: drop-shadow(0 14px 18px rgba(20,20,20,.18)); }
     .pbadge { position: absolute; top: 14px; left: 14px; right:auto; background: var(--red); color: #fff; text-align: center; padding: 8px 12px; font-size: 10px; font-family:'Archivo','Satoshi',sans-serif; font-weight: 900; letter-spacing: .13em; transform: rotate(-2deg); z-index:2; box-shadow:3px 3px 0 var(--dark); }
     .pbadge-hero { background: var(--pink); }
     .pbody { padding: 22px; display:flex; flex-direction:column; flex:1; }
@@ -389,7 +389,7 @@ function closeMenu() {
     <div class="pcard" data-product="spicy-citrus">
       <div class="pimg">
         <div class="pbadge pbadge-hero">HERO SKU — FAN FAVOURITE</div>
-        <img src="assets/sku-spicy-citrus.svg" alt="Spicy Citrus Finishing Salt" />
+        <img src="assets/sku-spicy-citrus-tin.png" alt="Spicy Citrus Finishing Salt tin" />
       </div>
       <div class="pbody">
         <p class="pnum" data-slug="spicy-citrus">01 / Spicy Citrus</p>
@@ -406,7 +406,7 @@ function closeMenu() {
     <div class="pcard" data-product="garlic-butter">
       <div class="pimg">
         <div class="pbadge">NEW CORE FLAVOUR</div>
-        <img src="assets/sku-garlic-butter.svg" alt="Garlic Butter Finishing Salt" />
+        <img src="assets/sku-garlic-butter-tin.png" alt="Garlic Butter Finishing Salt tin" />
       </div>
       <div class="pbody">
         <p class="pnum" data-slug="garlic-butter">02 / Garlic Butter</p>
@@ -423,7 +423,7 @@ function closeMenu() {
     <div class="pcard" data-product="cinnamon-sugar">
       <div class="pimg">
         <div class="pbadge">NEW CORE FLAVOUR</div>
-        <img src="assets/sku-cinnamon-sugar.svg" alt="Cinnamon Sugar Finishing Salt" />
+        <img src="assets/sku-cinnamon-sugar-tin.png" alt="Cinnamon Sugar Finishing Salt tin" />
       </div>
       <div class="pbody">
         <p class="pnum" data-slug="cinnamon-sugar">03 / Cinnamon Sugar</p>
