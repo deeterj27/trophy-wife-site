@@ -326,7 +326,7 @@
   <a href="#about" onclick="closeMenu()">Our Story</a>
   <a href="#howto" onclick="closeMenu()">How To Use</a>
   <a href="mailto:Hello@trophywife.ca?subject=TROPHYWIFE%20Wholesale%20Inquiry" onclick="closeMenu()">Wholesale</a>
-  <a href="https://bexhn7-dp.myshopify.com/products/the-trophy-set" style="color:#C8242F;font-weight:900" onclick="closeMenu()">Get The Trophy Set</a>
+  <a href="#gift-set" style="color:#C8242F;font-weight:900" onclick="closeMenu()">Get The Trophy Set</a>
 </div>
 <script>
 function toggleMenu() {
@@ -348,7 +348,7 @@ function closeMenu() {
     <p class="hero-sub">Small-batch finishing salts for the counter, the clutch, and the cocktail rim. The final touch that makes dinner look intentional.</p>
     <div class="btns">
       <a href="#products" class="btn btn-red">Shop The Salts</a>
-      <a href="https://bexhn7-dp.myshopify.com/products/the-trophy-set" class="btn btn-outline">Get The Trophy Set</a>
+      <a href="#gift-set" class="btn btn-outline">Get The Trophy Set</a>
     </div>
   </div>
 </div>
@@ -439,7 +439,7 @@ function closeMenu() {
   </div>
 
   <!-- Gift Set -->
-  <div class="gift-card">
+  <div class="gift-card" id="gift-set">
     <div class="gift-img">
       <img src="assets/product-hands.png" alt="The Trophy Set — three Trophy Wife Finishing Salts" />
     </div>
@@ -579,7 +579,7 @@ function closeMenu() {
       <p class="footer-h">Shop</p>
       <ul class="footer-links">
         <li><a href="#products">All Salts</a></li>
-        <li><a href="https://bexhn7-dp.myshopify.com/products/the-trophy-set">The Trophy Set</a></li>
+        <li><a href="#gift-set">The Trophy Set</a></li>
         <li><a href="#club">Limited Drops</a></li>
         <li><a href="mailto:Hello@trophywife.ca?subject=TROPHYWIFE%20Wholesale%20Inquiry" id="wholesale">Wholesale Inquiry</a></li>
       </ul>
@@ -622,6 +622,7 @@ const VARIANTS = {
   'spicy-citrus':    '47407966585080',
   'garlic-butter':   '48329990603000',
   'cinnamon-sugar':  '48329990930680',
+  'trophy-set':      '48063430197496',
 };
 
 // ─── Cart State ───
@@ -770,8 +771,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const giftBtn = document.querySelector('.btn-pink');
   if (giftBtn) {
     giftBtn.textContent = 'Get The Trophy Set →';
-    giftBtn.href = `https://${SHOPIFY_STORE}/products/the-trophy-set`;
-    giftBtn.target = '_blank';
+    giftBtn.href = '#products';
+    giftBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      giftBtn.textContent = 'Adding...';
+      giftBtn.style.pointerEvents = 'none';
+      try {
+        await addToCart(VARIANTS['trophy-set']);
+        giftBtn.textContent = '✓ Added';
+        setTimeout(() => {
+          giftBtn.textContent = 'Get The Trophy Set →';
+          giftBtn.style.pointerEvents = '';
+        }, 2000);
+      } catch (e) {
+        giftBtn.textContent = 'Get The Trophy Set →';
+        giftBtn.style.pointerEvents = '';
+      }
+    });
   }
 
   // Add cart icon to nav
