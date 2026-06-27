@@ -627,6 +627,7 @@ const VARIANTS = {
 // ─── Cart State ───
 let cartId = null;
 let cartCount = 0;
+let checkoutUrl = null;
 
 // ─── GraphQL Helper ───
 async function sfetch(query, variables = {}) {
@@ -647,6 +648,9 @@ async function createCart() {
     mutation { cartCreate { cart { id checkoutUrl } } }
   `);
   cartId = data.data.cartCreate.cart.id;
+  checkoutUrl = data.data.cartCreate.cart.checkoutUrl;
+  localStorage.setItem('tw_cart_id', cartId);
+  localStorage.setItem('tw_checkout_url', checkoutUrl);
   return data.data.cartCreate.cart;
 }
 
@@ -665,6 +669,10 @@ async function addToCart(variantId) {
   });
   const cart = data.data.cartLinesAdd.cart;
   cartCount = cart.totalQuantity;
+  checkoutUrl = cart.checkoutUrl;
+  localStorage.setItem('tw_cart_id', cartId);
+  localStorage.setItem('tw_checkout_url', checkoutUrl);
+  localStorage.setItem('tw_cart_count', String(cartCount));
   updateCartBadge();
   showCartToast(cart.checkoutUrl);
   return cart;
@@ -714,6 +722,10 @@ function showCartToast(checkoutUrl) {
 
 // ─── Wire up Add to Cart buttons on DOM ready ───
 document.addEventListener('DOMContentLoaded', () => {
+  cartId = localStorage.getItem('tw_cart_id');
+  checkoutUrl = localStorage.getItem('tw_checkout_url');
+  cartCount = Number(localStorage.getItem('tw_cart_count') || 0);
+
   // Map product slugs to buttons
   const buttonMap = {
     'spicy-citrus':    'btn-spicy-citrus',
@@ -765,8 +777,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add cart icon to nav
   const nav = document.querySelector('nav');
   if (nav) {
-    const cartEl = document.createElement('div');
-    cartEl.style.cssText = 'position:relative;cursor:pointer;display:flex;align-items:center;';
+    const cartEl = document.createElement('a');
+    cartEl.href = '#products';
+    cartEl.setAttribute('aria-label', 'Open cart');
+    cartEl.style.cssText = 'position:relative;cursor:pointer;display:flex;align-items:center;color:inherit;text-decoration:none;';
     cartEl.innerHTML = `
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
@@ -774,7 +788,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span id="cart-badge" style="display:none;position:absolute;top:-8px;right:-8px;background:#E94440;color:#fff;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;"></span>
     `;
+    cartEl.addEventListener('click', (e) => {
+      if (checkoutUrl) {
+        e.preventDefault();
+        window.location.href = checkoutUrl;
+      }
+    });
     nav.appendChild(cartEl);
+    updateCartBadge();
   }
 });
 </script>
