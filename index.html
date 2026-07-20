@@ -138,6 +138,37 @@
     .commerce-trust { max-width:1120px; margin:26px auto 34px; padding:16px 20px; background:var(--cream); border:1.5px solid rgba(20,20,20,.18); display:grid; grid-template-columns:repeat(4,1fr); gap:12px; text-align:center; }
     .commerce-trust span { font-family:'Archivo','Satoshi',sans-serif; font-size:10px; font-weight:900; letter-spacing:.1em; line-height:1.4; text-transform:uppercase; }
 
+    /* CART DRAWER */
+    body.cart-open { overflow:hidden; }
+    .cart-overlay { position:fixed; inset:0; background:rgba(20,20,20,.58); opacity:0; visibility:hidden; transition:opacity .22s,visibility .22s; z-index:9997; }
+    .cart-overlay.is-open { opacity:1; visibility:visible; }
+    .cart-drawer { position:fixed; inset:0 0 0 auto; width:min(460px,100%); background:var(--cream); border-left:2px solid var(--dark); transform:translateX(100%); transition:transform .28s ease; z-index:9998; display:flex; flex-direction:column; box-shadow:-18px 0 50px rgba(0,0,0,.2); }
+    .cart-drawer.is-open { transform:translateX(0); }
+    .cart-head { background:var(--pink); color:#fff; padding:25px 24px; display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--dark); }
+    .cart-head h2 { color:#fff; font-size:34px; margin:0; }
+    .cart-close { border:0; background:transparent; color:#fff; font:900 28px/1 'Archivo',sans-serif; cursor:pointer; padding:8px; min-width:44px; min-height:44px; }
+    .cart-close:focus-visible { outline:2px solid var(--cream); outline-offset:2px; }
+    .cart-lines { overflow:auto; flex:1; padding:22px; }
+    .cart-empty { min-height:260px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:12px; }
+    .cart-empty strong { font-family:'Bodoni Moda','Georgia',serif; font-size:28px; }
+    .cart-empty span { color:#666; font-size:14px; }
+    .cart-line { display:grid; grid-template-columns:84px 1fr; gap:16px; padding:0 0 20px; margin:0 0 20px; border-bottom:1px solid rgba(20,20,20,.2); }
+    .cart-line img { width:84px; height:96px; object-fit:contain; background:#fffaf0; border:1px solid rgba(20,20,20,.18); }
+    .cart-line-name { font-family:'Archivo',sans-serif; font-size:14px; font-weight:900; line-height:1.2; margin:2px 0 7px; text-transform:uppercase; }
+    .cart-line-price { font-size:13px; color:#555; margin-bottom:13px; }
+    .cart-line-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .qty { display:flex; align-items:center; border:1.5px solid var(--dark); background:#fff; }
+    .qty button { width:36px; height:36px; border:0; background:#fff; color:var(--dark); font:900 18px/1 'Archivo',sans-serif; cursor:pointer; }
+    .qty span { min-width:32px; text-align:center; font:800 13px/1 'Archivo',sans-serif; }
+    .cart-remove { border:0; background:transparent; color:var(--red); text-decoration:underline; font:800 11px/1 'Archivo',sans-serif; text-transform:uppercase; cursor:pointer; padding:10px 0; }
+    .cart-foot { padding:22px 24px 26px; border-top:2px solid var(--dark); background:#fffaf0; }
+    .cart-subtotal { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; }
+    .cart-subtotal strong { font-size:23px; }
+    .cart-note { font-size:11px; color:#666; line-height:1.5; margin:0 0 15px; }
+    .cart-checkout { display:block; width:100%; border:0; background:var(--red); color:#fff; padding:17px; text-align:center; text-decoration:none; font:900 12px/1 'Archivo',sans-serif; letter-spacing:.12em; text-transform:uppercase; box-shadow:4px 4px 0 var(--pink); }
+    .cart-checkout[aria-disabled="true"] { opacity:.45; pointer-events:none; }
+    .cart-status { font:800 12px/1.5 'Archivo',sans-serif; text-align:center; padding:20px; color:#555; }
+
     .signal-strip { background: var(--dark); color: var(--cream); display:grid; grid-template-columns:repeat(4,1fr); border-top:2px solid var(--cream); border-bottom:2px solid var(--cream); }
     .signal-item { padding:18px 22px; text-align:center; border-right:1px solid rgba(240,230,208,.18); }
     .signal-item:last-child { border-right:0; }
@@ -636,235 +667,24 @@ const VARIANTS = {
 };
 
 // ─── Cart State ───
-let cartId = null;
-let cartCount = 0;
-let checkoutUrl = null;
+let cartId=null, cartCount=0, checkoutUrl=null, activeCart=null;
+const CART_FIELDS=`fragment CartDetail on Cart{id checkoutUrl totalQuantity cost{subtotalAmount{amount currencyCode}} lines(first:50){nodes{id quantity merchandise{... on ProductVariant{id price{amount currencyCode} image{url altText} product{title handle}}}}}}`;
+const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const cash=(amount,currency='USD')=>new Intl.NumberFormat('en-US',{style:'currency',currency}).format(Number(amount));
 
-// ─── GraphQL Helper ───
-async function sfetch(query, variables = {}) {
-  const res = await fetch(`https://${SHOPIFY_STORE}/api/2024-01/graphql.json`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  return res.json();
-}
+async function sfetch(query,variables={}){const res=await fetch(`https://${SHOPIFY_STORE}/api/2024-01/graphql.json`,{method:'POST',headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':STOREFRONT_TOKEN},body:JSON.stringify({query,variables})});if(!res.ok)throw new Error(`Shopify request failed (${res.status})`);const data=await res.json();if(data.errors?.length)throw new Error(data.errors[0].message);return data;}
+function updateCartBadge(){const badge=document.getElementById('cart-badge');if(badge){badge.textContent=cartCount;badge.style.display=cartCount>0?'flex':'none';}}
+function persistCart(cart){activeCart=cart;cartId=cart?.id||null;cartCount=cart?.totalQuantity||0;checkoutUrl=cart?.checkoutUrl||null;if(cartId){localStorage.setItem('tw_cart_id',cartId);localStorage.setItem('tw_checkout_url',checkoutUrl||'');localStorage.setItem('tw_cart_count',String(cartCount));}else ['tw_cart_id','tw_checkout_url','tw_cart_count'].forEach(k=>localStorage.removeItem(k));updateCartBadge();renderCartDrawer(cart);}
+async function createCart(){const d=await sfetch(`mutation{cartCreate{cart{...CartDetail}userErrors{field message}}}${CART_FIELDS}`),p=d.data?.cartCreate;if(!p?.cart||p.userErrors?.length)throw new Error(p?.userErrors?.[0]?.message||'Could not create cart');persistCart(p.cart);return p.cart;}
+async function fetchCart(){if(!cartId)return null;const d=await sfetch(`query($id:ID!){cart(id:$id){...CartDetail}}${CART_FIELDS}`,{id:cartId});return d.data?.cart||null;}
+async function addToCart(variantId){const add=()=>sfetch(`mutation($cartId:ID!,$lines:[CartLineInput!]!){cartLinesAdd(cartId:$cartId,lines:$lines){cart{...CartDetail}userErrors{field message}}}${CART_FIELDS}`,{cartId,lines:[{merchandiseId:`gid://shopify/ProductVariant/${variantId}`,quantity:1}]});if(!cartId)await createCart();let d=await add(),p=d.data?.cartLinesAdd;if(!p?.cart||p.userErrors?.length){persistCart(null);await createCart();d=await add();p=d.data?.cartLinesAdd;}if(!p?.cart||p.userErrors?.length)throw new Error(p?.userErrors?.[0]?.message||'Could not add item');persistCart(p.cart);openCartDrawer(false);return p.cart;}
+async function setLineQuantity(lineId,quantity){if(!cartId)return;setCartStatus('Updating cart…');const remove=quantity<=0;const q=remove?`mutation($cartId:ID!,$ids:[ID!]!){cartLinesRemove(cartId:$cartId,lineIds:$ids){cart{...CartDetail}userErrors{field message}}}${CART_FIELDS}`:`mutation($cartId:ID!,$lines:[CartLineUpdateInput!]!){cartLinesUpdate(cartId:$cartId,lines:$lines){cart{...CartDetail}userErrors{field message}}}${CART_FIELDS}`;const d=await sfetch(q,remove?{cartId,ids:[lineId]}:{cartId,lines:[{id:lineId,quantity}]}),p=remove?d.data?.cartLinesRemove:d.data?.cartLinesUpdate;if(!p?.cart||p.userErrors?.length)throw new Error(p?.userErrors?.[0]?.message||'Could not update cart');persistCart(p.cart);}
+function ensureCartDrawer(){if(document.getElementById('tw-cart-drawer'))return;const shell=document.createElement('div');shell.innerHTML=`<div class="cart-overlay" id="tw-cart-overlay"></div><aside class="cart-drawer" id="tw-cart-drawer" role="dialog" aria-modal="true" aria-labelledby="tw-cart-title" aria-hidden="true"><div class="cart-head"><h2 id="tw-cart-title">Your Cart</h2><button class="cart-close" type="button" aria-label="Close cart">×</button></div><div class="cart-lines" id="tw-cart-lines"></div><div class="cart-foot"><div class="cart-subtotal"><span>Subtotal</span><strong id="tw-cart-subtotal">$0.00</strong></div><p class="cart-note">Shipping and taxes are calculated securely at checkout.</p><a class="cart-checkout" id="tw-cart-checkout" href="#products" aria-disabled="true">Secure Checkout</a></div></aside>`;document.body.append(...shell.children);document.getElementById('tw-cart-overlay').onclick=closeCartDrawer;document.querySelector('.cart-close').onclick=closeCartDrawer;document.getElementById('tw-cart-lines').onclick=async e=>{const btn=e.target.closest('[data-cart-action]');if(!btn)return;const line=activeCart?.lines?.nodes?.find(x=>x.id===btn.dataset.lineId);if(!line)return;const a=btn.dataset.cartAction,next=a==='increase'?line.quantity+1:a==='decrease'?line.quantity-1:0;try{await setLineQuantity(line.id,next);}catch(_){setCartStatus('Cart update failed. Please try again.');}};renderCartDrawer(activeCart);}
+function renderCartDrawer(cart){if(!document.getElementById('tw-cart-drawer'))return;const list=document.getElementById('tw-cart-lines'),checkout=document.getElementById('tw-cart-checkout'),subtotal=document.getElementById('tw-cart-subtotal'),lines=cart?.lines?.nodes||[];if(!lines.length){list.innerHTML='<div class="cart-empty"><strong>Your cart is waiting.</strong><span>Pick a flavour. Make dinner interesting.</span><a class="btn btn-red" href="#products" data-close-cart>Shop The Salts</a></div>';list.querySelector('[data-close-cart]')?.addEventListener('click',closeCartDrawer);subtotal.textContent='$0.00';checkout.href='#products';checkout.setAttribute('aria-disabled','true');return;}list.innerHTML=lines.map(line=>{const m=line.merchandise,title=m.product?.title||'Trophy Wife Salt',img=m.image?.url||'',total=Number(m.price?.amount||0)*line.quantity;return `<div class="cart-line">${img?`<img src="${esc(img)}" alt="${esc(m.image?.altText||title)}">`:'<div></div>'}<div><div class="cart-line-name">${esc(title)}</div><div class="cart-line-price">${cash(total,m.price?.currencyCode)}</div><div class="cart-line-actions"><div class="qty" aria-label="Quantity for ${esc(title)}"><button type="button" data-cart-action="decrease" data-line-id="${esc(line.id)}" aria-label="Decrease quantity">−</button><span>${line.quantity}</span><button type="button" data-cart-action="increase" data-line-id="${esc(line.id)}" aria-label="Increase quantity">+</button></div><button type="button" class="cart-remove" data-cart-action="remove" data-line-id="${esc(line.id)}">Remove</button></div></div></div>`;}).join('');subtotal.textContent=cash(cart.cost?.subtotalAmount?.amount||0,cart.cost?.subtotalAmount?.currencyCode);checkout.href=cart.checkoutUrl;checkout.removeAttribute('aria-disabled');}
+function setCartStatus(message){const list=document.getElementById('tw-cart-lines');if(list)list.insertAdjacentHTML('afterbegin',`<div class="cart-status">${esc(message)}</div>`);}
+async function openCartDrawer(refresh=true){ensureCartDrawer();document.body.classList.add('cart-open');const overlay=document.getElementById('tw-cart-overlay'),drawer=document.getElementById('tw-cart-drawer');overlay.classList.add('is-open');drawer.classList.add('is-open');drawer.setAttribute('aria-hidden','false');document.querySelector('.cart-close')?.focus();if(refresh&&cartId){setCartStatus('Loading your cart…');try{const cart=await fetchCart();if(!cart)throw new Error();persistCart(cart);}catch(_){persistCart(null);}}}
+function closeCartDrawer(){document.body.classList.remove('cart-open');document.getElementById('tw-cart-overlay')?.classList.remove('is-open');const d=document.getElementById('tw-cart-drawer');d?.classList.remove('is-open');d?.setAttribute('aria-hidden','true');}
+async function hydrateProducts(){try{const d=await sfetch(`query{spicy:product(handle:"spicy-citrus"){handle availableForSale variants(first:1){nodes{id price{amount currencyCode}}}} garlic:product(handle:"garlic-butter"){handle availableForSale variants(first:1){nodes{id price{amount currencyCode}}}} cinnamon:product(handle:"cinnamon-sugar"){handle availableForSale variants(first:1){nodes{id price{amount currencyCode}}}} set:product(handle:"the-trophy-set"){handle availableForSale variants(first:1){nodes{id price{amount currencyCode}}}}}`);Object.values(d.data||{}).filter(Boolean).forEach(p=>{const v=p.variants?.nodes?.[0];if(!v)return;const key=p.handle==='the-trophy-set'?'trophy-set':p.handle;VARIANTS[key]=v.id.split('/').pop();const card=document.querySelector(`[data-product="${p.handle}"]`),price=card?.querySelector('.pprice'),btn=card?.querySelector('.add-btn');if(price)price.innerHTML=`${cash(v.price.amount,v.price.currencyCode).replace('.00','')} <sub>${v.price.currencyCode}</sub>`;if(btn&&!p.availableForSale){btn.textContent='Sold Out';btn.disabled=true;}if(key==='trophy-set'){const gp=document.querySelector('.gift-price');if(gp)gp.innerHTML=`${cash(v.price.amount,v.price.currencyCode).replace('.00','')} <sub>${v.price.currencyCode}</sub>`;}});}catch(_){} }
 
-// ─── Create Cart ───
-async function createCart() {
-  const data = await sfetch(`
-    mutation { cartCreate { cart { id checkoutUrl } userErrors { field message } } }
-  `);
-  const payload = data.data?.cartCreate;
-  if (!payload?.cart || payload.userErrors?.length) {
-    throw new Error(payload?.userErrors?.[0]?.message || 'Could not create cart');
-  }
-  cartId = payload.cart.id;
-  checkoutUrl = payload.cart.checkoutUrl;
-  localStorage.setItem('tw_cart_id', cartId);
-  localStorage.setItem('tw_checkout_url', checkoutUrl);
-  return payload.cart;
-}
-
-// ─── Add to Cart ───
-async function addToCart(variantId) {
-  const addLine = async () => sfetch(`
-    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
-      cartLinesAdd(cartId: $cartId, lines: $lines) {
-        cart { id totalQuantity checkoutUrl }
-        userErrors { field message }
-      }
-    }
-  `, {
-    cartId,
-    lines: [{ merchandiseId: `gid://shopify/ProductVariant/${variantId}`, quantity: 1 }]
-  });
-
-  if (!cartId) await createCart();
-  let data = await addLine();
-  let payload = data.data?.cartLinesAdd;
-
-  if (!payload?.cart || payload.userErrors?.length) {
-    // Shopify carts expire. Clear a stale cart once, create a fresh one, and retry.
-    cartId = null;
-    checkoutUrl = null;
-    cartCount = 0;
-    ['tw_cart_id','tw_checkout_url','tw_cart_count'].forEach(key => localStorage.removeItem(key));
-    await createCart();
-    data = await addLine();
-    payload = data.data?.cartLinesAdd;
-  }
-
-  if (!payload?.cart || payload.userErrors?.length) {
-    throw new Error(payload?.userErrors?.[0]?.message || 'Could not add item to cart');
-  }
-
-  const cart = payload.cart;
-  cartCount = cart.totalQuantity;
-  checkoutUrl = cart.checkoutUrl;
-  localStorage.setItem('tw_cart_id', cartId);
-  localStorage.setItem('tw_checkout_url', checkoutUrl);
-  localStorage.setItem('tw_cart_count', String(cartCount));
-  updateCartBadge();
-  showCartToast(cart.checkoutUrl);
-  return cart;
-}
-
-// ─── Update Cart Badge ───
-function updateCartBadge() {
-  const badge = document.getElementById('cart-badge');
-  if (badge) {
-    badge.textContent = cartCount;
-    badge.style.display = cartCount > 0 ? 'flex' : 'none';
-  }
-}
-
-// ─── Cart Toast ───
-function showCartToast(checkoutUrl) {
-  let toast = document.getElementById('tw-cart-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'tw-cart-toast';
-    toast.style.cssText = `
-      position:fixed; bottom:32px; right:32px; z-index:9999;
-      background:#141414; color:#F0E6D0; padding:20px 28px;
-      border-radius:2px; box-shadow:0 8px 32px rgba(0,0,0,0.35);
-      font-family:'Satoshi',sans-serif; font-size:14px;
-      display:flex; align-items:center; gap:16px;
-      transform:translateY(100px); opacity:0;
-      transition:transform .3s, opacity .3s;
-      max-width:340px;
-    `;
-    document.body.appendChild(toast);
-  }
-  toast.innerHTML = `
-    <span style="font-family:'Archivo','Satoshi',sans-serif;font-weight:900;color:#D61D6A">TW</span>
-    <div style="flex:1">
-      <div style="font-weight:700;margin-bottom:4px">Added to cart</div>
-      <div style="opacity:.6;font-size:12px">${cartCount} item${cartCount !== 1 ? 's' : ''} in your cart</div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <a href="${checkoutUrl}" style="background:#E94440;color:#fff;padding:8px 16px;border-radius:1px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.08em;text-align:center;white-space:nowrap">CHECKOUT</a>
-      <button onclick="document.getElementById('tw-cart-toast').style.opacity=0" style="background:transparent;border:1px solid rgba(240,230,208,.2);color:rgba(240,230,208,.6);padding:6px 16px;border-radius:1px;cursor:pointer;font-size:11px;font-family:'Satoshi',sans-serif">Keep Shopping</button>
-    </div>
-  `;
-  setTimeout(() => { toast.style.transform = 'translateY(0)'; toast.style.opacity = '1'; }, 50);
-  setTimeout(() => { toast.style.transform = 'translateY(100px)'; toast.style.opacity = '0'; }, 8000);
-}
-
-// ─── Wire up Add to Cart buttons on DOM ready ───
-document.addEventListener('DOMContentLoaded', () => {
-  cartId = localStorage.getItem('tw_cart_id');
-  checkoutUrl = localStorage.getItem('tw_checkout_url');
-  cartCount = Number(localStorage.getItem('tw_cart_count') || 0);
-
-  // Reconcile persisted cart state with Shopify instead of trusting stale localStorage.
-  if (cartId) {
-    sfetch(`query cartState($id: ID!) { cart(id: $id) { id totalQuantity checkoutUrl } }`, { id: cartId })
-      .then(data => {
-        const liveCart = data.data?.cart;
-        if (!liveCart) throw new Error('Expired cart');
-        cartCount = liveCart.totalQuantity;
-        checkoutUrl = liveCart.checkoutUrl;
-        localStorage.setItem('tw_cart_count', String(cartCount));
-        localStorage.setItem('tw_checkout_url', checkoutUrl);
-        updateCartBadge();
-      })
-      .catch(() => {
-        cartId = null; checkoutUrl = null; cartCount = 0;
-        ['tw_cart_id','tw_checkout_url','tw_cart_count'].forEach(key => localStorage.removeItem(key));
-        updateCartBadge();
-      });
-  }
-
-  // Map product slugs to buttons
-  const buttonMap = {
-    'spicy-citrus':    'btn-spicy-citrus',
-    'garlic-butter':   'btn-garlic-butter',
-    'cinnamon-sugar':  'btn-cinnamon-sugar',
-  };
-
-  // Set data-product on cards by their pnum text
-  document.querySelectorAll('.pcard').forEach(card => {
-    const pnum = card.querySelector('.pnum');
-    if (pnum) {
-      const text = pnum.textContent.toLowerCase();
-      if (text.includes('spicy')) card.dataset.product = 'spicy-citrus';
-      else if (text.includes('garlic') || text.includes('butter')) card.dataset.product = 'garlic-butter';
-      else if (text.includes('cinnamon') || text.includes('sugar')) card.dataset.product = 'cinnamon-sugar';
-    }
-  });
-
-  document.querySelectorAll('.add-btn').forEach(btn => {
-    // Find parent card and get product slug from data attribute or position
-    const card = btn.closest('.pcard');
-    if (card) {
-      const slug = card.dataset.product;
-      if (slug && VARIANTS[slug]) {
-        btn.addEventListener('click', async () => {
-          btn.textContent = 'Adding...';
-          btn.disabled = true;
-          try {
-            await addToCart(VARIANTS[slug]);
-            btn.textContent = 'Added';
-            setTimeout(() => { btn.textContent = 'Add to Cart'; btn.disabled = false; }, 2000);
-          } catch(e) {
-            btn.textContent = 'Add to Cart';
-            btn.disabled = false;
-          }
-        });
-      }
-    }
-  });
-
-  // Gift Set button
-  const giftBtn = document.querySelector('.btn-pink');
-  if (giftBtn) {
-    giftBtn.textContent = 'Get The Trophy Set →';
-    giftBtn.href = '#products';
-    giftBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      giftBtn.textContent = 'Adding...';
-      giftBtn.style.pointerEvents = 'none';
-      try {
-        await addToCart(VARIANTS['trophy-set']);
-        giftBtn.textContent = 'Added';
-        setTimeout(() => {
-          giftBtn.textContent = 'Get The Trophy Set →';
-          giftBtn.style.pointerEvents = '';
-        }, 2000);
-      } catch (e) {
-        giftBtn.textContent = 'Get The Trophy Set →';
-        giftBtn.style.pointerEvents = '';
-      }
-    });
-  }
-
-  // Add cart icon to nav
-  const nav = document.querySelector('nav');
-  if (nav) {
-    const cartEl = document.createElement('a');
-    cartEl.href = '#products';
-    cartEl.setAttribute('aria-label', 'Open cart');
-    cartEl.style.cssText = 'position:relative;cursor:pointer;display:flex;align-items:center;color:inherit;text-decoration:none;';
-    cartEl.innerHTML = `
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
-        <path d="M16 10a4 4 0 01-8 0"/>
-      </svg>
-      <span id="cart-badge" style="display:none;position:absolute;top:-8px;right:-8px;background:#E94440;color:#fff;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;"></span>
-    `;
-    cartEl.addEventListener('click', (e) => {
-      if (checkoutUrl) {
-        e.preventDefault();
-        window.location.href = checkoutUrl;
-      }
-    });
-    nav.appendChild(cartEl);
-    updateCartBadge();
-  }
-});
+document.addEventListener('DOMContentLoaded',()=>{ensureCartDrawer();cartId=localStorage.getItem('tw_cart_id');checkoutUrl=localStorage.getItem('tw_checkout_url');cartCount=Number(localStorage.getItem('tw_cart_count')||0);updateCartBadge();hydrateProducts();if(cartId)fetchCart().then(c=>{if(!c)throw new Error();persistCart(c);}).catch(()=>persistCart(null));document.querySelectorAll('.add-btn').forEach(btn=>{const slug=btn.closest('.pcard')?.dataset.product;if(!slug||!VARIANTS[slug])return;btn.onclick=async()=>{const original=btn.textContent;btn.textContent='Adding…';btn.disabled=true;try{await addToCart(VARIANTS[slug]);btn.textContent='Added';}catch(_){btn.textContent='Try Again';}setTimeout(()=>{if(btn.textContent!=='Sold Out'){btn.textContent=original;btn.disabled=false;}},1800);};});const gift=document.querySelector('.btn-pink');if(gift){gift.href='#products';gift.onclick=async e=>{e.preventDefault();const original=gift.textContent;gift.textContent='Adding…';gift.style.pointerEvents='none';try{await addToCart(VARIANTS['trophy-set']);gift.textContent='Added';}catch(_){gift.textContent='Try Again';}setTimeout(()=>{gift.textContent=original;gift.style.pointerEvents='';},1800);};}const nav=document.querySelector('nav');if(nav){const cart=document.createElement('button');cart.type='button';cart.setAttribute('aria-label','Open cart');cart.style.cssText='position:relative;cursor:pointer;display:flex;align-items:center;color:inherit;background:transparent;border:0;padding:10px;';cart.innerHTML=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span id="cart-badge" style="display:none;position:absolute;top:1px;right:1px;background:#E94440;color:#fff;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;"></span>`;cart.onclick=()=>openCartDrawer(true);nav.appendChild(cart);updateCartBadge();}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCartDrawer();});});
 </script>
